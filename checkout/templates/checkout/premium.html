@@ -1,0 +1,61 @@
+{%extends 'profiles/base.html'%}
+{%load static%}
+
+{%block content%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/base.css'%}">
+
+<h2 class="text-center ">Suscribe to my premium plans</h2>
+<div class="row mt-5 mb-5 ">
+	
+
+
+	{%for membership in object_list%}
+	{%if membership.Membership_type != 'Free'%}
+	<div class="ml-4 mr-5 mb-2 col-md-3 rounded">
+			<h3 class="text-center">Premium {{membership.Membership_type}}</h3>
+		<p class="text-center"><strong>{{membership.price}}</strong></p>
+		<ul>
+			<p><strong>Available posts</strong></p>
+			{% for post in membership.post_set.all %}
+
+				<li>{{post.title}}</li>
+			
+			{%endfor%}
+		</ul>
+		
+		<ul>
+			<p><strong>Other access</strong></p>
+			<li>access to this </li>
+			<li>Access to that</li>
+			<li>Seven days free trial</li>
+			<li>Awsome</li>
+		</ul>
+
+		<form method="POST" action="{%url 'premium'%}">
+			{%csrf_token%}
+			{%if user.usermembership.membership.Membership_type  != membership.Membership_type %}
+
+			<button class="mb-3 btn btn-block btn-light">Select</button>
+			{%else%}
+			<p><small>This is your current membership</small></p>
+			{%endif%}
+
+			<input type="hidden" name="membership_type" value="{{membership.Membership_type}}">
+
+		</form>
+		
+	</div>
+	{%endif%}
+	{%endfor%}
+
+
+
+
+
+</div>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,1 @@
+web: gunicorn jeremaih.wsgi --log-file -

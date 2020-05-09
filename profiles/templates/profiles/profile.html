@@ -1,0 +1,75 @@
+{% extends "profiles/base.html" %}
+{%load static%}
+{%block content%}
+<h2 class="border-bottom pb-3"> {{user.username }} profile </h2>
+<!-- {%static '{{object.image.url}}'%} -->
+
+{%if user_subscription.active %}
+<div class="row">
+	<div class="col-md-6 offset-3">
+		<p>you currently have a subscription to : <span class="badge badge-success">Premium {{user_membership.membership.Membership_type}}   
+	</span> </p>
+	<p>since : {{user_subscription.get_data_created}}</p>
+	<p>next payment is due : {{user_subscription.get_next_billing_date}}</p>
+	<p><a href="{%url 'cancel_membership'%}">click here</a> to cancel your subsription</p>
+
+</div>
+	</div>
+{%else%}
+<p>you do not have an active premium subscription <a href="{%url 'premium'%}">click here </a> to start enjoying premium</p>
+{%endif%} 
+
+<link rel="stylesheet" type="text/css" href="{%static 'css/base.css'%}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="row mb-5">
+	<div class="col-md-4">
+		<div class="card mb-3">
+		  <img src="{{object.image.url}}" alt="John" style="width:100%">
+		  <h2>{{object.name}}</h2>
+		  <p class="title">{{user.email}}</p></p>
+		  <p>{{object.dob}}</p>
+		  <p>{{object.mobile}}</p>
+		  <a href="{{object.facebook}}"><i class="fa fa-twitter"></i></a>
+		  <a href="{{object.facebook}}"><i class="fa fa-linkedin"></i></a>
+		  <a href="{{object.facebook}}"><i class="fa fa-facebook"></i></a>
+		  <p><button>Website</button></p>
+		</div>
+		<a href="{%url 'profile_update' user.pk %}" class= "btn btn-outline-success">update</a>
+		<a href="{%url 'profile_delete' user.pk %}" class= "float-right btn btn-outline-danger">Delete</a>
+
+	</div>
+
+
+
+	{%if user_subscription.active %}
+	<div class="row">
+	<div class="col-md-6 offset-3">
+		<p>you currently have a subscription to : <span class="badge badge-success">Premium {{user_membership.membership.Membership_type}}   
+	</span> </p>
+	<p>since : {{user_subscription.get_data_created}}</p>
+	<p>next payment is due : {{user_subscription.get_next_billing_date}}</p>
+	<p><a href="{%url 'cancel_membership'%}">click here</a> to cancel your subsription</p>
+
+	</div>
+	</div>
+{%else%}
+<p>you do not have an active premium subscription <a href="{%url 'premium'%}">click here </a> to start enjoying premium</p>
+{%endif%} 
+
+</div>
+
+
+
+
+	
+
+</div>
+
+
+
+
+
+{%endblock%}

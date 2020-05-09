@@ -1,0 +1,25 @@
+
+{% extends "profiles/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{%block content%}
+<div class="col-sm-6 offset-3 p-3  rounded mb-5">
+
+	{%if object != None%}
+	<h4>{{object.title}}</h4>
+	{{object.date_posted}}
+	<br>
+	<br>
+	<p>{{object.content}}</p>
+	{%else%}
+	<p>This post is for only premium members </p>
+	<p><strong>Upgrade to premium today</strong></p>
+	<a href="#" class="btn btn-lg btn-primary">Premium</a>
+	
+</div>
+{%endif%}
+
+
+
+{%endblock%}
