@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from . forms import ContactForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from . models import UserProfile, Post, UserMembership
@@ -11,7 +12,10 @@ class Home(ListView):
 	model=Post
 	template_name='profiles/home.html'
 
-class PostDetailView(DetailView):
+
+
+
+class PostDetailView(LoginRequiredMixin, DetailView):
 	model=Post
 	template_name='profiles/post_detail.html' 
 
@@ -47,7 +51,7 @@ def aboutview(request):
 	return render(request, 'profiles/about.html', context)
 
 #
-class ProfileView(DetailView):
+class ProfileView(LoginRequiredMixin,DetailView):
 	template_name='profiles/profile.html'
 	model=UserProfile
 
@@ -64,17 +68,17 @@ class ProfileView(DetailView):
 
 
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 	template_name='profiles/profile_update.html'
 	model=UserProfile
 	fields=['name', 'dob', 'image', 'facebook', 'website', 'mobile']
 
 
-class ProfileDeleteView(DeleteView):
+class ProfileDeleteView(LoginRequiredMixin, DeleteView):
 	template_name='profiles/profile_delete.html'
 	model=UserProfile
 
-class ProfileCreateView(CreateView):
+class ProfileCreateView(LoginRequiredMixin, CreateView):
 	template_name='profiles/profile_create.html'
 	model=UserProfile
 	fields=['name', 'dob', 'image', 'facebook', 'website', 'mobile']

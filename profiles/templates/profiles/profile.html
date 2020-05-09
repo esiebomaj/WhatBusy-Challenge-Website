@@ -1,27 +1,61 @@
 {% extends "profiles/base.html" %}
 {%load static%}
+
+{%block title%}
+Profile
+{%endblock%}
 {%block content%}
+
+{%block style%}
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    	<style type="text/css">
+  .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+
+{%endblock%}
+
+
+
 <h2 class="border-bottom pb-3"> {{user.username }} profile </h2>
 <!-- {%static '{{object.image.url}}'%} -->
 
-{%if user_subscription.active %}
-<div class="row">
-	<div class="col-md-6 offset-3">
-		<p>you currently have a subscription to : <span class="badge badge-success">Premium {{user_membership.membership.Membership_type}}   
-	</span> </p>
-	<p>since : {{user_subscription.get_data_created}}</p>
-	<p>next payment is due : {{user_subscription.get_next_billing_date}}</p>
-	<p><a href="{%url 'cancel_membership'%}">click here</a> to cancel your subsription</p>
 
-</div>
-	</div>
-{%else%}
-<p>you do not have an active premium subscription <a href="{%url 'premium'%}">click here </a> to start enjoying premium</p>
-{%endif%} 
 
-<link rel="stylesheet" type="text/css" href="{%static 'css/base.css'%}">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <div class="row mb-5">

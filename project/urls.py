@@ -20,6 +20,7 @@ from profiles import views as profile_views
 from django.conf import settings
 from django.conf.urls.static import static
 from checkout import views as checkout_views
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -33,11 +34,10 @@ urlpatterns = [
     path('profile/<int:pk>/delete', profile_views.ProfileDeleteView.as_view(), name='profile_delete'),
     path('profile/<int:pk>/update', profile_views.ProfileUpdateView.as_view(), name='profile_update'),
     path('contact/', profile_views.contactview, name='contact'),
-    path('checkout/', checkout_views.checkoutview, name='checkout'),
+    
     path('payment', checkout_views.PaymentView, name='payment'),
-    path('charge/', checkout_views.charge, name='charge'),
-    path('success/<str:args>/', checkout_views.successMsg, name='success'),
-    path('premium/', checkout_views.PremiumView.as_view(), name='premium'),
+    
+    path('premium/', login_required(checkout_views.PremiumView.as_view()), name='premium'),
     path('update_membership/<sub_id>', checkout_views.update_membership_view, name='update_membership'),
     path('cancel_membership/', checkout_views.cancelsub, name='cancel_membership'),
 

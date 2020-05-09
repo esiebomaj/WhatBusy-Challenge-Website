@@ -5,9 +5,9 @@
 
 <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Need a django developer!</h1>
-      <p>You are at the right place. A build stylish, responsive and very functional webapps using django at a very affordable fee. so what are you waiting for ?</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Hire me today »</a></p>
+      <h1 class="display-3">Drive your sales and profits today</h1>
+      <p>WhatsBusy uses the industry’s most advanced data science to simplify your POS data, clearly telling you what to do, and what it’s worth.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Get started today»</a></p>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
 
 
       <div class="col-md-4">
-        <a href="#"><img  src="{%static 'img/home.jpg'%}" class="img-fluid mt-5 rounded" ></a>
+        <a href="#"><img  src="https://www.mobiletransaction.org/wp-content/uploads/2019/03/card-machine-amount-400x432.jpg" class="img-fluid mt-5 rounded" ></a>
         
       </div>
 
@@ -64,21 +64,31 @@
 
   </div>
 
-  <div class="row">
-    <div class="col-md-6 offset-3 pb-3 mb-4 border-bottom">
+  <div class="row mb-4">
+    <div class="col-md-10 offset-1 pb-3 mb-4 border-bottom">
       <h3>Post section</h3>
       {% for object in object_list %}
-        <h4>Title : <a href="{%url 'post_detail' object.pk %}">{{object.title}}</a></h4>
-        {{object.content}}
-        <br>
-       <strong>allowed memberships :</strong> 
-        <ul>
-          {%for i in object.allowed_memberships.all%}
-          <li class="badge badge-success">{{i}}</li>
+
+
+<div class="card w-100">
+        <img src="{{post.author.profile.image.url}}" class="rounded-circle small">
+        <div class="card-body">
+          <h5 class="card-title">{{object.title}}</h5>
+          <p class="card-text">written by {{object.author}}, at {{post.date_posted}}</p>
+          <p class="card-text">{{object.content}}</p>
+          <strong>allowed memberships :</strong> 
           
+          {%for i in object.allowed_memberships.all%}
+          <p class="badge badge-success">{{i}}</p>
           {%endfor%}
-        </ul>
-        
+          <br>
+          <a href="{%url 'post_detail' object.pk %}" class="btn btn-primary">see more</a>
+        </div>
+      </div>
+
+
+
+
       {%endfor%}
     </div>
     
@@ -86,18 +96,13 @@
   </div>
 
 
-  <div class="row">
-    <div class="col-md-6 offset-3">
-      <form action="{%url 'checkout'%}" class="form" >
 
-         <h3>Make a donation</h3>
-      <p>Do you like my work? support me by making a small donation!!</p>
-      <button  class="btn btn-success">Donate!!</button>
-      </form>
-     
-    </div>
-    
-  </div>
+
+
+
+
+  
+
 
 
 {%endblock%}

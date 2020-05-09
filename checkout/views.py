@@ -4,9 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView, DetailView
 from django.conf import settings
-from checkout.forms import DonationForm
 from profiles.models import Memberships, Subscription, UserMembership
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -15,50 +15,6 @@ import stripe
 import os
 
 stripe.api_key = 'sk_test_5UBH6SjTB12sryQRxLTIUfyL00bROW3YcZ'
-
-
-
-
-@login_required
-def checkoutview(request):
-	form=DonationForm()
-
-	context={'d_form':form}
-    
-	return render(request, 'checkout/checkout.html', context )
-
-    
-
-def charge(request): # new
-    
-    if request.method =='POST':
-    	print(request.POST)
-    	token=request.POST['stripeToken']
-    	amount=int(request.POST['amount'])
-    	
-
-    	customer=stripe.Customer.create(
-    		
-    		email=request.POST['email'],
-    		name=request.POST['name'],
-    		source=request.POST['stripeToken']
-    		
-    		)
-
-    	stripe.Charge.create(
-    		customer=customer,
-    		amount=amount*100,
-    		currency="usd",
-    		description=f"{amount}usd Donation!!",
-)
-
-    return redirect(reverse('success', args=[amount]))
-
-
-
-def successMsg(request, args):
-    amount =args
-    return render(request, 'checkout/success.html', {'amount':amount})
 
 
 
@@ -90,7 +46,7 @@ class PremiumView(ListView):
 
 
  
-
+@login_required
 def PaymentView(request):
     selected_membership_type=request.session['selected_membership_type']
     current_user_membership=UserMembership.objects.filter(user=request.user).first()
@@ -123,7 +79,7 @@ def PaymentView(request):
         
 
  
-
+@login_required
 def update_membership_view(request, sub_id):
     selected_membership_type=request.session['selected_membership_type']
     current_user_membership=UserMembership.objects.filter(user=request.user).first()
@@ -146,7 +102,7 @@ def update_membership_view(request, sub_id):
     return redirect('/')
 
 
-
+@login_required()
 def cancelsub(request):
     current_user_membership=UserMembership.objects.filter(user=request.user).first()
 

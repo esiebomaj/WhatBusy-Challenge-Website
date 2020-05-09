@@ -1,13 +1,15 @@
 {% extends "profiles/base.html" %}
 {% load crispy_forms_tags %}
 
-
+{%block title%}
+contact us
+{%endblock%}
 {%block content%}
 <div class="col-sm-6 offset-3">
 {%if message%}
 <h3>{{message}}</h3>
 {%else%}
-<h3 class="border-bottom badge badge-warning pb-3"> Leave me a message here </h3>
+<h3 class="border-bottom badge badge-warning pb-3"> Leave us a message here </h3>
 <form class="form" method="POST">
 	{%csrf_token%}
 	{{form|crispy}}
