@@ -15,3 +15,7 @@ django-crispy-forms==1.9.0
 stripe==2.47.0
 
 ```
+
+### Deployment
+
+successfully deployed to Heroku at https://whatbusy.herokuapp.com/
